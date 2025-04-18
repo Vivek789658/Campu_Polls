@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir dist",
+    "build": "parcel build index.html --no-source-maps --public-url /",
     "dev": "parcel index.html --host 0.0.0.0"
   },
   "author": "TP",

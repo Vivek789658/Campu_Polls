@@ -2,8 +2,15 @@ services:
   - type: web
     name: frontend
     env: static
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: ./client/dist
+    buildCommand: |
+      cd client
+      npm install
+      npm run build
+    staticPublishPath: client/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
     routes:
       - type: rewrite
         source: /*
