@@ -1,0 +1,10 @@
+.welcome-container {
+    padding: 32px;
+}
+
+.welcome-container h1 {
+    color: #1e293b;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+}

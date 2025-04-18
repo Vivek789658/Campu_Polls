@@ -1,0 +1,233 @@
+.about-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 6rem 2rem 2rem;
+    background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #4f46e5;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:hover {
+    background-color: #4f46e5;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.about-header h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.about-header .subtitle {
+    font-size: 1.25rem;
+    color: #666;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.about-section {
+    text-align: center;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #4f46e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.icon-wrapper i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.about-section h2 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.features-section {
+    margin-bottom: 4rem;
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: #4f46e5;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    color: #666;
+}
+
+.team-section {
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.team-member {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.member-photo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background: #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-photo i {
+    font-size: 2.5rem;
+    color: #4f46e5;
+}
+
+.team-member h3 {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.team-member p {
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 5rem 1rem 1rem;
+    }
+
+    .back-button {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .about-content {
+        padding: 2rem;
+    }
+
+    .about-header h1 {
+        font-size: 2rem;
+    }
+
+    .about-header .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}

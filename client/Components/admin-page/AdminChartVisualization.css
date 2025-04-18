@@ -1,0 +1,31 @@
+.admin-chart-visualization-container {
+    padding: 32px;
+    min-height: 100vh;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 32px;
+    padding: 0;
+}
+
+.chart-container h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #1e293b;
+}
+
+canvas {
+    width: 100% !important;
+    height: 280px !important;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        margin-bottom: 24px;
+    }
+}
