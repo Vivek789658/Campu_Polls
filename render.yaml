@@ -4,7 +4,11 @@ services:
     env: static
     buildCommand: |
       cd client
-      npm install
+      npm config set registry https://registry.npmjs.org/
+      npm config set fetch-retry-mintimeout 100000
+      npm config set fetch-retry-maxtimeout 600000
+      npm cache clean --force
+      npm install --prefer-offline --no-audit
       npm run build
     staticPublishPath: client/dist
     headers:
