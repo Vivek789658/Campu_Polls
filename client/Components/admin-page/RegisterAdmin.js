@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 require("dotenv").config();
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const RegisterAdmins = () => {
   const [file, setFile] = useState(null);

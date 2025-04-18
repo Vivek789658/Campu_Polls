@@ -40,7 +40,7 @@ npm install
 
 3. Create a .env file in the root directory:
 ```env
-API_URL=http://localhost:4000
+API_URL=https://pr-01.onrender.com
 ```
 
 4. Start the development server:

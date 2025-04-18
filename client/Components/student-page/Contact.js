@@ -125,7 +125,7 @@ const Contact = () => {
             try {
                 setLoading(true);
                 try {
-                    const response = await fetch('http://localhost:4000/api/v1/contact');
+                    const response = await fetch('https://pr-01.onrender.com/api/v1/contact');
                     if (!response.ok) {
                         throw new Error('Failed to fetch contact data');
                     }
@@ -213,7 +213,7 @@ const Contact = () => {
             setSending(false);
 
             // Optional: In a real app you would call something like:
-            // const response = await fetch('http://localhost:4000/api/v1/sendMessage', {
+            // const response = await fetch('https://pr-01.onrender.com/api/v1/sendMessage', {
             //     method: 'POST',
             //     headers: { 'Content-Type': 'application/json' },
             //     body: JSON.stringify({

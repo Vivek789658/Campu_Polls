@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 require("dotenv").config();
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const AdminContactRequests = () => {
   const [adminContactRequests, setAdminContactRequests] = useState([]);

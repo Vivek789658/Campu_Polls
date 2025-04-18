@@ -17,7 +17,7 @@ const ChartVisualization = ({ type = 'rating', subjectData = null }) => {
                 setError(null);
 
                 // Construct the URL based on type and subject
-                let url = `http://localhost:4000/api/v1/feedback/stats?type=${type}`;
+                let url = `https://pr-01.onrender.com/api/v1/feedback/stats?type=${type}`;
                 if (subjectData) {
                     url += `&subjectCode=${subjectData.code}`;
                 }

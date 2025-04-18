@@ -9,7 +9,7 @@ const StudentNotifications = () => {
   const userDataString = localStorage.getItem("userData");
   const { _id } = JSON.parse(userDataString);
   require("dotenv").config();
-  const BASE_URL = "http://localhost:4000";
+  const BASE_URL = "https://pr-01.onrender.com";
 
   const fetchNotifications = async () => {
     try {

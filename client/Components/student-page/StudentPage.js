@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "./SideBar";
 import { FaClipboardList, FaCalendarAlt, FaClock, FaQuestion, FaBook, FaUsers, FaExternalLinkAlt, FaSpinner, FaBars, FaTimes } from "react-icons/fa";
 
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = "https://pr-01.onrender.com/api/v1";
 
 // SVG icons for theme toggle
 const SunIcon = () => (

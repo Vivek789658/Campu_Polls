@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = "https://pr-01.onrender.com/api/v1";
 
 // Simple SVG icons to replace react-icons
 const SunIcon = () => (

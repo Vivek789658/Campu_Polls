@@ -5,7 +5,7 @@ import Alert from "../common/Alert";
 import { FaChalkboardTeacher, FaBook, FaChartBar, FaEnvelope, FaBell, FaSignOutAlt, FaSun, FaMoon, FaBars, FaArrowLeft, FaUserGraduate, FaStar, FaComments, FaChartLine } from 'react-icons/fa';
 import "./ProfessorPage.css";
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const ProfessorPage = () => {
   const [professorInfo, setProfessorInfo] = useState(null);

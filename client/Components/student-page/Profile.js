@@ -41,7 +41,7 @@ const Profile = () => {
     return null;
   }
 
-  const BASE_URL = "http://localhost:4000";
+  const BASE_URL = "https://pr-01.onrender.com";
 
   useEffect(() => {
     fetchSubjects(userId);

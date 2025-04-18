@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FeedbackFormBody from "./FeedbackFormBody";
 
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = "https://pr-01.onrender.com/api/v1";
 
 const GiveFeedback = () => {
   const { formName } = useParams();
