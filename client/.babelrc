@@ -1,0 +1,22 @@
+{
+    "presets": [
+        "@babel/preset-react",
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 versions",
+                        "> 1%",
+                        "iOS >= 10",
+                        "Android >= 4.4",
+                        "Safari >= 10",
+                        "not dead"
+                    ]
+                },
+                "useBuiltIns": "usage",
+                "corejs": 3
+            }
+        ]
+    ]
+}

@@ -11,6 +11,9 @@
   "author": "TP",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
     "@parcel/transformer-sass": "^2.12.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
@@ -33,6 +36,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.8.4",
     "chart.js": "^4.4.2",
+    "core-js": "^3.41.0",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
