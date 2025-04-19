@@ -11,7 +11,7 @@ const AdminChartVisualization = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch("http://localhost:4000/api/v1/data");
+                const response = await fetch("https://pr-01.onrender.com/api/v1/data");
                 if (!response.ok) {
                     throw new Error("Failed to fetch chart data");
                 }

@@ -4,7 +4,7 @@ import BarChart from "./Barchart";
 import "./FeedbackViewPage.css";
 import { useNavigate } from "react-router-dom";
 require("dotenv").config();
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = "https://pr-01.onrender.com/api/v1";
 
 const FeedbackViewPage = ({ feedbackFormName }) => {
   const [questions, setQuestions] = useState([]);

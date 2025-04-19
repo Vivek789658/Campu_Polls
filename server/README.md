@@ -53,7 +53,7 @@ JWT_SECRET=your_jwt_secret
 npm start
 ```
 
-The API will be available at `http://localhost:4000`
+The API will be available at `https://pr-01.onrender.com`
 
 ## API Endpoints
 

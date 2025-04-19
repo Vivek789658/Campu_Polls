@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../student-page/Header";
 import SideBar from "../student-page/SideBar";
 require("dotenv").config();
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const ProfessorNotification = () => {
   const [profContactRequests, setProfRequests] = useState([]);
@@ -112,11 +112,10 @@ const ProfessorNotification = () => {
                     <div className="">
                       {statusMessage ? (
                         <div
-                          className={`p-4 text-sm rounded-lg ${
-                            statusMessage.includes("pending")
+                          className={`p-4 text-sm rounded-lg ${statusMessage.includes("pending")
                               ? "bg-yellow-100 text-yellow-700"
                               : "bg-red-100 text-red-700"
-                          }`}
+                            }`}
                         >
                           {statusMessage}
                         </div>

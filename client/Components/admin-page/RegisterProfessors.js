@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Alert from "../common/Alert";
 require("dotenv").config();
-const BASE_URL = "http://192.168.92.153:4000";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const RegisterProfessors = () => {
   const [file, setFile] = useState(null);
@@ -137,8 +138,8 @@ const RegisterProfessors = () => {
               onClick={handleFileUpload}
               disabled={!file || loading}
               className={`${!file || loading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
                 } text-white font-medium py-2 px-8 rounded-md transition duration-300 flex items-center justify-center min-w-[180px]`}
             >
               {loading ? (
