@@ -269,10 +269,7 @@ const Login = () => {
               <div className="nav-column">
                 <h3>Connect With Us</h3>
                 <div className="social-media-links">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-item facebook">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-item twitter">
+                  <a href="https://x.com/Vivek12092" target="_blank" rel="noopener noreferrer" className="social-item twitter">
                     <i className="fab fa-twitter"></i>
                   </a>
                   <a href="https://www.instagram.com/imvivek_12/" target="_blank" rel="noopener noreferrer" className="social-item instagram">
