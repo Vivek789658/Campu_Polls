@@ -91,26 +91,27 @@ const Login = () => {
   };
 
   const scrollToAbout = () => {
-    const headerOffset = 100; // Offset for header height and some spacing
-    const aboutPosition = aboutRef.current?.getBoundingClientRect().top;
-    const offsetPosition = aboutPosition + window.pageYOffset - headerOffset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+    if (aboutRef.current) {
+      aboutRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
     setIsMobileMenuOpen(false);
   };
 
   const scrollToContact = () => {
-    const headerOffset = 100; // Offset for header height and some spacing
-    const contactPosition = contactRef.current?.getBoundingClientRect().top;
-    const offsetPosition = contactPosition + window.pageYOffset - headerOffset;
+    if (contactRef.current) {
+      const headerHeight = 80; // Height of your fixed header
+      const element = contactRef.current;
+      const elementPosition = element.getBoundingClientRect().top;
+      const scrollPosition = elementPosition + window.pageYOffset - headerHeight;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -149,7 +150,7 @@ const Login = () => {
       {/* Bottom Section */}
       <div className="bottom-section">
         {/* About Section */}
-        <div className="about-content" ref={aboutRef}>
+        <div id="about" className="about-content" ref={aboutRef} style={{ scrollMarginTop: '80px' }}>
           <h2>About Campus Polls and Opinions</h2>
           <div className="about-grid">
             <div className="about-card">
@@ -172,7 +173,7 @@ const Login = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="contact-content" ref={contactRef}>
+        <div className="contact-content" ref={contactRef} style={{ scrollMarginTop: '80px' }}>
           <div className="section-header">
             <h2>Contact Us</h2>
             <div className="header-line"></div>
