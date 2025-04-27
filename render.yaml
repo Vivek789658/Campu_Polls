@@ -1,26 +1,30 @@
 services:
   - type: web
-    name: frontend
+    name: feedback-hub-backend
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DB_LINK
+        sync: false
+    healthCheckPath: /api/v1/health-check
+    autoDeploy: true
+
+  - type: static
+    name: feedback-hub-frontend
     env: static
-    buildCommand: |
-      cd client
-      npm config set registry https://registry.npmjs.org/
-      npm config set fetch-retry-mintimeout 100000
-      npm config set fetch-retry-maxtimeout 600000
-      npm cache clean --force
-      npm install --prefer-offline --no-audit
-      npm run build
+    buildCommand: cd client && npm install && npm run build
     staticPublishPath: client/dist
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: no-cache
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
-      - key: NODE_VERSION
-        value: 18.19.0
-      - key: NODE_ENV
-        value: production 
+      - key: REACT_APP_API_URL
+        value: https://feedback-hub-backend.onrender.com 

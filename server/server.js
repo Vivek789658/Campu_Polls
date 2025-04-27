@@ -1,38 +1,99 @@
 require("dotenv").config();
-const PORT = process.env.PORT || 4000;
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
+
+// Configure CORS with more permissive settings for development
+app.use(cors({
+    origin: true, // Allow all origins in development
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
-// Configure CORS to allow connections from your local network
-app.use(cors());
+const PORT = process.env.PORT || 4000;
+const MONGODB_URI = process.env.DB_LINK || 'mongodb://localhost:27017/feedback_hub';
 
-// MongoDB connection with better error handling
-mongoose
-    .connect(process.env.DB_LINK, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("Connected to MongoDB");
-        // Listen on all network interfaces
-        app.listen(PORT, '0.0.0.0', () => {
-            console.log(`Server running at port ${PORT}`);
-            console.log('Access the application on your local network:');
-            console.log(`- Local: http://localhost:${PORT}`);
-            console.log(`- Network: Check your computer's IP address and use: http://YOUR_IP:${PORT}`);
+// MongoDB connection with enhanced error handling
+const connectWithRetry = async () => {
+    try {
+        console.log('Attempting MongoDB connection...');
+        await mongoose.connect(MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+            connectTimeoutMS: 10000,
         });
-    })
-    .catch((err) => {
+        console.log("Successfully connected to MongoDB");
+        startServer();
+    } catch (err) {
         console.error("MongoDB connection error:", err);
-        process.exit(1);
+        console.log('Retrying connection in 5 seconds...');
+        setTimeout(connectWithRetry, 5000);
+    }
+};
+
+// Separate server start function
+const startServer = () => {
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server running at port ${PORT}`);
+        console.log('Access the application on your local network:');
+        console.log(`- Local: http://localhost:${PORT}`);
+        console.log(`- Network: Check your computer's IP address and use: http://YOUR_IP:${PORT}`);
     });
+};
+
+// Basic route for testing
+app.get('/', (req, res) => {
+    res.json({ message: 'Server is running' });
+});
+
+// Health check endpoint
+app.get('/api/v1/health-check', (req, res) => {
+    res.json({
+        status: 'healthy',
+        mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
+});
+
+// Handle process termination
+process.on('SIGINT', async () => {
+    try {
+        await mongoose.connection.close();
+        console.log('MongoDB connection closed through app termination');
+        process.exit(0);
+    } catch (err) {
+        console.error('Error during MongoDB connection closure:', err);
+        process.exit(1);
+    }
+});
+
+// Start the connection process
+connectWithRetry();
+
+// Export for testing
+module.exports = app;
 
 const routes = require("./routes/routes");
+const statsRoutes = require("./routes/stats");
+
 app.use("/api/v1", routes);
+app.use("/api", statsRoutes);
 
 app.get("/", (req, res) => {
     res.send("server home");

@@ -1,215 +1,166 @@
 import React, { useEffect, useState } from "react";
-import Chart from "chart.js/auto";
-import "./AdminChartVisualization.css";
+import { Chart as ChartJS } from "chart.js/auto";
+import { Bar, Pie, Line } from "react-chartjs-2";
+import { FaChartBar, FaChartPie, FaChartLine, FaSpinner } from "react-icons/fa";
+import "./AdminPage.css";
 
 const AdminChartVisualization = () => {
-    const [chartData, setChartData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [chartData, setChartData] = useState({
+        ratings: [10, 15, 25, 30, 20],
+        subjects: [
+            { name: 'Mathematics', avgRating: 4.2 },
+            { name: 'Physics', avgRating: 4.5 },
+            { name: 'Chemistry', avgRating: 4.0 },
+            { name: 'Biology', avgRating: 4.3 },
+            { name: 'Computer Science', avgRating: 4.7 }
+        ],
+        trends: [
+            { date: '2024-01', avgRating: 4.2 },
+            { date: '2024-02', avgRating: 4.3 },
+            { date: '2024-03', avgRating: 4.5 }
+        ]
+    });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setLoading(true);
-                const response = await fetch("https://pr-01.onrender.com/api/v1/data");
-                if (!response.ok) {
-                    throw new Error("Failed to fetch chart data");
-                }
+                const response = await fetch('https://pr-01.onrender.com/api/v1/getFeedbackAnalytics');
                 const data = await response.json();
-                setChartData(data);
-                setLoading(false);
+                if (data && data.success && data.analytics) {
+                    setChartData(data.analytics);
+                }
             } catch (error) {
-                console.error("Error fetching chart data:", error);
-                setError("Failed to load chart data. Please try again later.");
+                console.error('Error fetching data:', error);
+            } finally {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
 
-    useEffect(() => {
-        if (!chartData) return;
-
-        // Bar Chart
-        const barCtx = document.getElementById("adminBarChart");
-        if (barCtx) {
-            const barChart = new Chart(barCtx, {
-                type: "bar",
-                data: {
-                    labels: Object.keys(chartData),
-                    datasets: [{
-                        label: "Ratings",
-                        data: Object.values(chartData),
-                        backgroundColor: "rgba(75, 192, 192, 0.6)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Ratings",
-                                font: {
-                                    size: 14,
-                                    weight: "bold"
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    }
-                }
-            });
-
-            return () => {
-                barChart.destroy();
-            };
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            }
         }
-    }, [chartData]);
+    };
 
-    useEffect(() => {
-        if (!chartData) return;
+    const ratingChartData = {
+        labels: ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'],
+        datasets: [{
+            label: 'Rating Distribution',
+            data: chartData.ratings,
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#4BC0C0',
+                '#9966FF'
+            ]
+        }]
+    };
 
-        // Pie Chart
-        const pieCtx = document.getElementById("adminPieChart");
-        if (pieCtx) {
-            const pieChart = new Chart(pieCtx, {
-                type: "pie",
-                data: {
-                    labels: Object.keys(chartData),
-                    datasets: [{
-                        label: "Ratings Distribution",
-                        data: Object.values(chartData),
-                        backgroundColor: [
-                            "rgba(255, 99, 132, 0.6)",
-                            "rgba(54, 162, 235, 0.6)",
-                            "rgba(255, 206, 86, 0.6)",
-                            "rgba(75, 192, 192, 0.6)",
-                            "rgba(153, 102, 255, 0.6)",
-                            "rgba(255, 159, 64, 0.6)"
-                        ],
-                        borderColor: [
-                            "rgba(255, 99, 132, 1)",
-                            "rgba(54, 162, 235, 1)",
-                            "rgba(255, 206, 86, 1)",
-                            "rgba(75, 192, 192, 1)",
-                            "rgba(153, 102, 255, 1)",
-                            "rgba(255, 159, 64, 1)"
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    }
-                }
-            });
+    const subjectChartData = {
+        labels: chartData.subjects.map(s => s.name),
+        datasets: [{
+            label: 'Subject Ratings',
+            data: chartData.subjects.map(s => s.avgRating),
+            backgroundColor: '#36A2EB'
+        }]
+    };
 
-            return () => {
-                pieChart.destroy();
-            };
-        }
-    }, [chartData]);
-
-    useEffect(() => {
-        if (!chartData) return;
-
-        // Line Chart
-        const lineCtx = document.getElementById("adminLineChart");
-        if (lineCtx) {
-            const lineChart = new Chart(lineCtx, {
-                type: "line",
-                data: {
-                    labels: Object.keys(chartData),
-                    datasets: [{
-                        label: "Ratings Over Time",
-                        data: Object.values(chartData),
-                        fill: false,
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Ratings",
-                                font: {
-                                    size: 14,
-                                    weight: "bold"
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    }
-                }
-            });
-
-            return () => {
-                lineChart.destroy();
-            };
-        }
-    }, [chartData]);
+    const trendChartData = {
+        labels: chartData.trends.map(t => t.date),
+        datasets: [{
+            label: 'Rating Trends',
+            data: chartData.trends.map(t => t.avgRating),
+            borderColor: '#4BC0C0',
+            fill: false
+        }]
+    };
 
     if (loading) {
         return (
-            <div className="admin-chart-visualization-container">
-                <div className="flex items-center justify-center h-64">
-                    <div className="text-xl font-semibold">Loading chart data...</div>
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="admin-chart-visualization-container">
-                <div className="flex items-center justify-center h-64">
-                    <div className="text-xl font-semibold text-red-500">{error}</div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f3f4f6' }}>
+                <div style={{ textAlign: 'center' }}>
+                    <FaSpinner style={{ animation: 'spin 1s linear infinite', height: '48px', width: '48px', color: '#4F46E5' }} />
+                    <p style={{ marginTop: '16px', color: '#4B5563' }}>Loading dashboard...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="admin-chart-visualization-container">
-            <h1 className="text-3xl font-bold text-center mb-6">Feedback Analytics Dashboard</h1>
+        <div style={{
+            minHeight: '100vh',
+            backgroundColor: '#f3f4f6',
+            padding: '24px'
+        }}>
+            <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+                <h1 style={{
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    color: '#111827',
+                    marginBottom: '24px'
+                }}>
+                    Admin Dashboard
+                </h1>
 
-            <div className="chart-container">
-                <h2>Rating Distribution (Bar Chart)</h2>
-                <canvas id="adminBarChart"></canvas>
-            </div>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: '24px',
+                    marginBottom: '24px'
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '8px',
+                        padding: '20px',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                    }}>
+                        <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
+                            <FaChartPie style={{ marginRight: '8px', display: 'inline' }} />
+                            Rating Distribution
+                        </h2>
+                        <div style={{ height: '300px' }}>
+                            <Pie data={ratingChartData} options={chartOptions} />
+                        </div>
+                    </div>
 
-            <div className="chart-container">
-                <h2>Rating Distribution (Pie Chart)</h2>
-                <canvas id="adminPieChart"></canvas>
-            </div>
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '8px',
+                        padding: '20px',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                    }}>
+                        <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
+                            <FaChartBar style={{ marginRight: '8px', display: 'inline' }} />
+                            Subject Ratings
+                        </h2>
+                        <div style={{ height: '300px' }}>
+                            <Bar data={subjectChartData} options={chartOptions} />
+                        </div>
+                    </div>
+                </div>
 
-            <div className="chart-container">
-                <h2>Rating Trends (Line Chart)</h2>
-                <canvas id="adminLineChart"></canvas>
+                <div style={{
+                    backgroundColor: 'white',
+                    borderRadius: '8px',
+                    padding: '20px',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                }}>
+                    <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
+                        <FaChartLine style={{ marginRight: '8px', display: 'inline' }} />
+                        Rating Trends
+                    </h2>
+                    <div style={{ height: '300px' }}>
+                        <Line data={trendChartData} options={chartOptions} />
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -56,12 +56,13 @@ const ProfessorPage = () => {
 
       setProfessorInfo({
         name: userData.name || "Professor Name",
-        department: "Department",
+        department: userData.department || "Computer Science",
         email: userData.username || "professor@university.edu",
         subjectsTaught: data.subjects ? data.subjects.map(subject => ({
           name: subject.subjectName,
           code: subject.subjectCode
-        })) : []
+        })) : [],
+        profileImage: userData.profileImage || ""
       });
 
     } catch (error) {
@@ -363,13 +364,14 @@ const ProfessorPage = () => {
           <div className="professor-profile">
             <div className="profile-header">
               <img
-                src="http://localhost:1234/profile.e71834e8.jpg"
+                src={professorInfo?.profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(professorInfo?.name || 'Professor')}
                 alt="Professor Profile"
                 className="profile-image"
               />
               <div className="profile-info">
                 <h2>{professorInfo?.name || 'Loading...'}</h2>
-                <p>{professorInfo?.department || 'Department'}</p>
+                <p className="department">{professorInfo?.department || 'Department'}</p>
+                <p className="email">{professorInfo?.email || 'Email'}</p>
               </div>
             </div>
           </div>
