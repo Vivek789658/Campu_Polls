@@ -5,7 +5,7 @@ import * as XLSX from 'xlsx';
 
 // Update BASE_URL based on environment
 const BASE_URL = process.env.NODE_ENV === 'production'
-    ? 'https://pr-01.onrender.com/api/v1'
+    ? 'https://campu-polls.onrender.com/api/v1'
     : 'http://localhost:4000/api/v1';
 
 // Update the checkServerStatus function to be more robust
