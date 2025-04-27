@@ -411,6 +411,23 @@
         display: block;
         opacity: 1;
     }
+    
+    .admin-tab {
+        color: #000000 !important;
+    }
+
+    .admin-tab svg {
+        color: #000000 !important;
+    }
+
+    .admin-tab:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-tab.active {
+        background: rgba(0, 0, 0, 0.2);
+        color: #000000 !important;
+    }
 }
 
 /* Small Mobile Devices */
