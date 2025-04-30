@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Alert from "../common/Alert";
 require("dotenv").config();
-const BASE_URL = "https://campu-polls.onrender.com";
+const BASE_URL = "https://pr-01.onrender.com";
 
 const AddSubjects = () => {
   const [file, setFile] = useState(null);
