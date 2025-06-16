@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./SideBar";
 
-const BASE_URL = "https://pr-01.onrender.com/api/v1";
+const BASE_URL = "https://campu-polls.onrender.com/api/v1";
 
 const FormDetailsPage = () => {
     const [formDetails, setFormDetails] = useState(null);
