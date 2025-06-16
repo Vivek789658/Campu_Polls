@@ -25,7 +25,7 @@ const AdminChartVisualization = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://pr-01.onrender.com/api/v1/getFeedbackAnalytics');
+                const response = await fetch('https://campu-polls.onrender.com/api/v1/getFeedbackAnalytics');
                 const data = await response.json();
                 if (data && data.success && data.analytics) {
                     setChartData(data.analytics);
