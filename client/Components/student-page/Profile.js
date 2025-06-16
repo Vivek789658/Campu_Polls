@@ -41,7 +41,7 @@ const Profile = () => {
     return null;
   }
 
-  const BASE_URL = "https://pr-01.onrender.com";
+  const BASE_URL = "https://campu-polls.onrender.com";
 
   useEffect(() => {
     fetchSubjects(userId);
