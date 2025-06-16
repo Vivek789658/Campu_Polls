@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaBell, FaTimes, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://pr-01.onrender.com/api/v1";
+const BASE_URL = "https://campu-polls.onrender.com/api/v1";
 
 const FeedbackNotification = () => {
     const [notifications, setNotifications] = useState([]);
