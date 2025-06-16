@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus, FaTrash, FaArrowUp, FaArrowDown, FaSave, FaClock, FaCalendarAlt, FaQuestionCircle, FaInfoCircle, FaExclamationTriangle } from "react-icons/fa";
 require("dotenv").config();
-const BASE_URL = "https://pr-01.onrender.com";
+const BASE_URL = "https://campu-polls.onrender.com";
 
 const CreateFeedbackForm = () => {
   const [name, setName] = useState("");
