@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Alert from "../common/Alert";
 require("dotenv").config();
-const BASE_URL = "https://pr-01.onrender.com";
+const BASE_URL = "https://campu-polls.onrender.com";
 
 const AssignSubjects = () => {
   const [file, setFile] = useState(null);
@@ -53,7 +53,7 @@ const AssignSubjects = () => {
       setFile(null);
       setFileName("");
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.error("Upload successful");
       if (error.response) {
         setError(error.response.data.message || "Server error occurred");
       } else if (error.request) {
